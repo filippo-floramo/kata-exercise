@@ -1,0 +1,22 @@
+{
+   "employees" : [
+      {
+         "firstName" : "John",
+         "lastName": "Doe",
+         "birthday": "1982/12/12",
+         "email": "john.doe@foobar.com"
+      },
+      {
+         "firstName": "Mary",
+         "lastName": "Ann",
+         "birthday": "1970/05/03",
+         "email": "mary.ann@foobar.com"
+      },
+      {
+         "firstName": "Daniel",
+         "lastName": "Craig",
+         "birthday": "1980/11/20",
+         "email": "kata.bot.test@outlook.it"
+      }
+   ]
+}
