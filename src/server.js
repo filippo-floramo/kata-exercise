@@ -27,35 +27,41 @@ transporter.verify((error) => {
 
 
 const sendBirthdayEmail = () => {
-
+   
    const employees = data.employees;
-
+   
    employees.forEach((employee) => {
-
+      
       const birthdayMsg = `Happy birthday, dear ${employee.firstName}`;
-
+      
       const scheduledBirthdayDate = getScheduledDate(employee.birthday);
-
+      
       let sendBirthdayMsg = {
          from: personalEmail,
          to: `${employee.email}`,
          subject: "Happy birthday!",
          text: birthdayMsg
       }; 
-
-      nodeCron.schedule(scheduledBirthdayDate, () => {
       
-         async function birthdayMessage() {
-            let info = await transporter.sendMail(sendBirthdayMsg)
-            console.log(`Message send: ${info.messageId}`);
-         }
+      async function birthdayMessage() {
+         let info = await transporter.sendMail(sendBirthdayMsg)
+         console.log(`Message send: ${info.messageId}`);
+      }
+      
+      nodeCron.schedule(scheduledBirthdayDate, () => {
          birthdayMessage().catch(console.error);
       });
-
+      
    } );
 };
 
-sendBirthdayEmail();
+(async function SetBirthdayMails() {
+   sendBirthdayEmail();
+   nodeCron.schedule('0 6 1 January *', () => {
+      sendBirthdayEmail().catch(console.error);
+   })
+})();
+
 
 
 
